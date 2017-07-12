@@ -1,5 +1,5 @@
 import React from 'react'
-import { BrowserRouter, Link } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 
 class Header extends React.Component {
   render () {
@@ -10,9 +10,9 @@ class Header extends React.Component {
           <ul id='nav-mobile' className='right hide-on-med-and-down'>
             <li className='active'>
               <Link to='/'>Search</Link>
-              </li>
+            </li>
             <li>
-              <Link to='/saved-articles'>Saved</Link>
+              <Link to='saved-articles'>Saved</Link>
             </li>
           </ul>
         </div>

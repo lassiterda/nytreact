@@ -38,13 +38,12 @@ class App extends React.Component {
       <BrowserRouter>
         <div>
           <Header />
-              <div className='container'>
-                <Route path='/'>
-                  <Search handleChange={this.handleChange} handleSubmit={this.handleSubmit} articles={this.state.results} />
-                </Route>
-                <Route exact={true} path='/saved-articles' component={Saved} />
-            </div>
-
+          <div className='container'>
+            <Route path='/'>
+              <Search handleChange={this.handleChange} handleSubmit={this.handleSubmit} articles={this.state.results} />
+            </Route>
+            <Route path='/saved-articles' component={Saved} />
+          </div>
         </div>
       </BrowserRouter>
     )
