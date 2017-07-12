@@ -1,4 +1,5 @@
 import React from 'react'
+import { BrowserRouter, Link } from 'react-router-dom'
 
 class Header extends React.Component {
   render () {
@@ -7,8 +8,12 @@ class Header extends React.Component {
         <div className='nav-wrapper container'>
           <h1 href='#' className='brand-logo title'>NY Times Article Archive</h1>
           <ul id='nav-mobile' className='right hide-on-med-and-down'>
-            <li className='active'><a href='#' >Search</a></li>
-            <li><a href='#'>About</a></li>
+            <li className='active'>
+              <Link to='/'>Search</Link>
+              </li>
+            <li>
+              <Link to='/saved-articles'>Saved</Link>
+            </li>
           </ul>
         </div>
       </nav>

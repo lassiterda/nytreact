@@ -1,8 +1,9 @@
 import React from 'react'
+import {BrowserRouter, Route} from 'react-router-dom'
 
 import Header from './Header'
 import Search from './Search'
-import Results from './Results'
+import Saved from './Saved'
 
 class App extends React.Component {
   constructor (props) {
@@ -28,19 +29,24 @@ class App extends React.Component {
       .then(res => { return res.json() })
       .then(dat => {
         this.setState({results: dat.response.docs})
-      }
+      })
       .catch(err => console.log(err))
   }
 
   render () {
     return (
-      <div>
-        <Header />
-        <div className='container'>
-          <Search handleChange={this.handleChange} handleSubmit={this.handleSubmit} />
-          <Results articles={this.state.results} key='article-results' />
+      <BrowserRouter>
+        <div>
+          <Header />
+              <div className='container'>
+                <Route path='/'>
+                  <Search handleChange={this.handleChange} handleSubmit={this.handleSubmit} articles={this.state.results} />
+                </Route>
+                <Route exact={true} path='/saved-articles' component={Saved} />
+            </div>
+
         </div>
-      </div>
+      </BrowserRouter>
     )
   }
 }
