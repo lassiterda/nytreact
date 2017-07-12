@@ -9,7 +9,7 @@ const ResultsItem = (props) => {
         <h6 className='grey-text darken-5'>
           {props.news_desk || 'General'} |
           {` ${dateObj.getDate()}/${dateObj.getMonth()}/${dateObj.getFullYear()}`}
-          </h6>
+        </h6>
         <blockquote className='grey-text darken-5 valign'>{props.snippet || props.lead_paragraph}</blockquote>
       </div>
       <div className='card-action align-right blue darken-3'>

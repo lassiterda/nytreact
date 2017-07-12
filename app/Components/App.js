@@ -28,7 +28,8 @@ class App extends React.Component {
       .then(res => { return res.json() })
       .then(dat => {
         this.setState({results: dat.response.docs})
-      })
+      }
+      .catch(err => console.log(err))
   }
 
   render () {
