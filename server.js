@@ -29,6 +29,7 @@ const PORT = process.env.PORT || 3000
 
   //  create mongodb connection
   mongoose.connect(process.env.db || 'mongodb://localhost:27017/nyrect_db')
+  mongoose.Promise = Promise
   const db = mongoose.connection
 
   //define db error handling
