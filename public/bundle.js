@@ -25846,8 +25846,6 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
-
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 var _react = __webpack_require__(6);
@@ -25907,6 +25905,9 @@ var Search = function (_React$Component) {
         return console.log(err);
       });
     }
+  }, {
+    key: 'handleSave',
+    value: function handleSave(event) {}
   }, {
     key: 'render',
     value: function render() {
@@ -25988,7 +25989,7 @@ var Search = function (_React$Component) {
             return _react2.default.createElement(
               'div',
               { className: 'col s12 m4' },
-              _react2.default.createElement(_ResultsItem2.default, _extends({}, article, { key: idx }))
+              _react2.default.createElement(_ResultsItem2.default, { article: article, key: idx })
             );
           })
         )
@@ -26012,49 +26013,87 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
 var _react = __webpack_require__(6);
 
 var _react2 = _interopRequireDefault(_react);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var ResultsItem = function ResultsItem(props) {
-  var dateObj = new Date(props.pub_date);
-  return _react2.default.createElement(
-    'div',
-    { className: 'card small hoverable' },
-    _react2.default.createElement(
-      'div',
-      { className: 'card-content white-text valign-container' },
-      _react2.default.createElement(
-        'h5',
-        { className: 'blue-text darken-3' },
-        props.headline.print_headline || props.headline.main
-      ),
-      _react2.default.createElement(
-        'h6',
-        { className: 'grey-text darken-5' },
-        props.news_desk || 'General',
-        ' |',
-        ' ' + dateObj.getDate() + '/' + dateObj.getMonth() + '/' + dateObj.getFullYear()
-      ),
-      _react2.default.createElement(
-        'blockquote',
-        { className: 'grey-text darken-5 valign' },
-        props.snippet || props.lead_paragraph
-      )
-    ),
-    _react2.default.createElement(
-      'div',
-      { className: 'card-action align-right blue darken-3' },
-      _react2.default.createElement(
-        'a',
-        { href: '#' },
-        'Save'
-      )
-    )
-  );
-};
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var ResultsItem = function (_Component) {
+  _inherits(ResultsItem, _Component);
+
+  function ResultsItem(props) {
+    _classCallCheck(this, ResultsItem);
+
+    var _this = _possibleConstructorReturn(this, (ResultsItem.__proto__ || Object.getPrototypeOf(ResultsItem)).call(this, props));
+
+    _this.handleSave = _this.handleSave.bind(_this);
+    return _this;
+  }
+
+  _createClass(ResultsItem, [{
+    key: 'handleSave',
+    value: function handleSave() {
+      var reqBody = {
+        nytId: this.props.article._id,
+        title: this.props.article.headline.print_headline || this.props.article.headline.main
+      };
+      window.fetch('/api/save', {
+        method: 'post',
+        body: JSON.stringify(reqBody)
+      }).then();
+    }
+  }, {
+    key: 'render',
+    value: function render() {
+      var dateObj = new Date(this.props.article.pub_date);
+      return _react2.default.createElement(
+        'div',
+        { className: 'card small hoverable' },
+        _react2.default.createElement(
+          'div',
+          { className: 'card-content white-text valign-container' },
+          _react2.default.createElement(
+            'h5',
+            { className: 'blue-text darken-3' },
+            this.props.article.headline.print_headline || this.props.article.headline.main
+          ),
+          _react2.default.createElement(
+            'h6',
+            { className: 'grey-text darken-5' },
+            this.props.article.news_desk || 'General',
+            ' |',
+            ' ' + dateObj.getDate() + '/' + dateObj.getMonth() + '/' + dateObj.getFullYear()
+          ),
+          _react2.default.createElement(
+            'blockquote',
+            { className: 'grey-text darken-5 valign' },
+            this.props.article.snippet || this.props.article.lead_paragraph
+          )
+        ),
+        _react2.default.createElement(
+          'div',
+          { className: 'card-action align-right blue darken-3' },
+          _react2.default.createElement(
+            'a',
+            { href: '#', onClick: this.handleSave },
+            'Save'
+          )
+        )
+      );
+    }
+  }]);
+
+  return ResultsItem;
+}(_react.Component);
 
 exports.default = ResultsItem;
 
@@ -26141,7 +26180,7 @@ var Saved = function (_Component) {
               { key: article.nytId },
               _react2.default.createElement(
                 'h5',
-                null,
+                { className: 'blue-text darken-3' },
                 article.title
               ),
               _react2.default.createElement('hr', null)
