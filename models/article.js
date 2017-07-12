@@ -3,6 +3,10 @@ const mongoose = require("mongoose")
 const Schema = mongoose.Schema
 
 var articleSchema = new Schema({
+  nytId: {
+    type: String,
+    required: true
+  }
   title: {
     type: String,
     required: true
@@ -11,14 +15,20 @@ var articleSchema = new Schema({
     type: String,
     required: true
   },
-  date: {
+  savedDate: {
     type: Date,
     default: new Date(),
     required: true
+  },
+  pubDate: {
+    type: Date
+  },
+  category: {
+    type: String
   }
 })
 
 // Create the Model
-const Click = mongoose.model("Click", ClickSchema)
+const Article = mongoose.model("Article", articleSchema)
 
-module.exports = CLick
+module.exports = Article
