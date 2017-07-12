@@ -6,7 +6,7 @@ var articleSchema = new Schema({
   nytId: {
     type: String,
     required: true
-  }
+  },
   title: {
     type: String,
     required: true
