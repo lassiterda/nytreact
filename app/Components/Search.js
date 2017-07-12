@@ -32,6 +32,10 @@ class Search extends React.Component {
       .catch(err => console.log(err))
   }
 
+  handleSave (event) {
+
+  }
+
   render () {
     return (
       <div>
@@ -63,7 +67,7 @@ class Search extends React.Component {
             article.key = article._id
             return (
               <div className='col s12 m4'>
-                <ResultsItem {...article} key={idx} />
+                <ResultsItem article={article} key={idx} />
               </div>
             )
           })}

@@ -27,7 +27,7 @@ class Saved extends Component {
               : this.state.savedArticles.map(article => {
                 return (
                   <div key={article.nytId}>
-                    <h5>{article.title}</h5>
+                    <h5 className='blue-text darken-3'>{article.title}</h5>
                     <hr />
                   </div>
                 )
