@@ -10,15 +10,25 @@ class App extends React.Component {
     this.state = {
       searchTerm: '',
       startYear: null,
-      endYear: null
+      endYear: null,
+      results: []
     }
     this.handleChange = this.handleChange.bind(this)
+    this.handleSubmit = this.handleSubmit.bind(this)
   }
-
   handleChange (event) {
     var newState = {}
     newState[event.target.id] = event.target.value
     this.setState(newState)
+  }
+  handleSubmit () {
+    let queryString = `https://api.nytimes.com/svc/search/v2/articlesearch.json?api-key=041467f312144c8cb89cdf1c6698a1b7&q=${this.state.searchTerm}`
+
+    window.fetch(queryString)
+      .then(res => { return res.json() })
+      .then(dat => {
+        this.setState({results: dat.response.docs})
+      })
   }
 
   render () {
@@ -26,9 +36,8 @@ class App extends React.Component {
       <div>
         <Header />
         <div className='container'>
-          <Search handleChange={this.handleChange} />
-          <Results results={this.state.results}/>
-          <p>{this.state.searchTerm}</p>
+          <Search handleChange={this.handleChange} handleSubmit={this.handleSubmit} />
+          <Results articles={this.state.results} key='article-results' />
         </div>
       </div>
     )

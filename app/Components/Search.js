@@ -20,7 +20,7 @@ class Search extends React.Component {
         </div>
         <div className='col  s12'>
           <div className='right-align'>
-            <a className='waves-effect waves-light btn blue darken-3' onClick={this.props.submitSearch}>Search</a>
+            <a className='waves-effect waves-light btn blue darken-3' onClick={this.props.handleSubmit}>Search</a>
           </div>
         </div>
       </div>

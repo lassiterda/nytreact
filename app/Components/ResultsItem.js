@@ -1,19 +1,22 @@
 import React from 'react'
 
-class ResultsItem extends React.Component {
-  render () {
-    return (
-        <div className='card'>
-          <div className='card-content white-text'>
-            <span className='card-title'>I am Item #{this.props.key}</span>
-            <p>I am a very simple card. I am good at containing small bits of information.
-            I am convenient because I require little markup to use effectively.</p>
-          </div>
-          <div className='card-action'>
-            <a href='#'>This is a link</a>
-            <a href='#'>This is a link</a>
-          </div>
+const ResultsItem = (props) => {
+  let dateObj = new Date(props.pub_date)
+  return (
+    <div className='card small hoverable'>
+      <div className='card-content white-text valign-container'>
+        <h5 className='blue-text darken-3'>{props.headline.print_headline || props.headline.main}</h5>
+        <h6 className='grey-text darken-5'>
+          {props.news_desk || 'General'} |
+          {` ${dateObj.getDate()}/${dateObj.getMonth()}/${dateObj.getFullYear()}`}
+          </h6>
+        <blockquote className='grey-text darken-5 valign'>{props.snippet || props.lead_paragraph}</blockquote>
       </div>
-    )
-  }
+      <div className='card-action align-right blue darken-3'>
+        <a href='#'>Save</a>
+      </div>
+    </div>
+  )
 }
+
+export default ResultsItem
