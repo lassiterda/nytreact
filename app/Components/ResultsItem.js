@@ -10,15 +10,18 @@ class ResultsItem extends Component {
     let reqBody = {
       nytId: this.props.article._id,
       title: this.props.article.headline.print_headline || this.props.article.headline.main,
-      URL:
-
+      URL: this.props.article.web_url,
+      pubDate: this.props.article.pub_date,
+      category: this.props.article.business_desk
     }
     window.fetch('/api/save',
-      {title
+      {
         method: 'post',
         body: JSON.stringify(reqBody)
       })
-      .then()
+      .then(response => { response.json() })
+      .then(dat => { console.log(dat) })
+      .catch(err => { console.log(err) })
   }
 
   render () {

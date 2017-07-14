@@ -12,12 +12,9 @@ router.get("/saved", function(req, res) {
 })
 
 router.post("/save", function(req, res) {
-  let savedArticle = new Article(req.body)
-
-  savedArticle.save()
+  Article.create(JSON.parse(req.body))
     .then((dbArticle) => { res.json(dbArticle) })
     .catch((err) => {  res.json(err)})
-
 })
 
 router.post("/delete/:id", function(req, res) {

@@ -28,6 +28,7 @@ class Saved extends Component {
                 return (
                   <div key={article.nytId}>
                     <h5 className='blue-text darken-3'>{article.title}</h5>
+                    <p>{article.category} | {article.pubDate}</p>
                     <hr />
                   </div>
                 )

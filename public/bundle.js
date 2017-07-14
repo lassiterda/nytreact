@@ -26044,12 +26044,21 @@ var ResultsItem = function (_Component) {
     value: function handleSave() {
       var reqBody = {
         nytId: this.props.article._id,
-        title: this.props.article.headline.print_headline || this.props.article.headline.main
+        title: this.props.article.headline.print_headline || this.props.article.headline.main,
+        URL: this.props.article.web_url,
+        pubDate: this.props.article.pub_date,
+        category: this.props.article.business_desk
       };
       window.fetch('/api/save', {
         method: 'post',
         body: JSON.stringify(reqBody)
-      }).then();
+      }).then(function (response) {
+        response.json();
+      }).then(function (dat) {
+        console.log(dat);
+      }).catch(function (err) {
+        console.log(err);
+      });
     }
   }, {
     key: 'render',
@@ -26182,6 +26191,13 @@ var Saved = function (_Component) {
                 'h5',
                 { className: 'blue-text darken-3' },
                 article.title
+              ),
+              _react2.default.createElement(
+                'p',
+                null,
+                article.category,
+                ' | ',
+                article.pubDate
               ),
               _react2.default.createElement('hr', null)
             );
